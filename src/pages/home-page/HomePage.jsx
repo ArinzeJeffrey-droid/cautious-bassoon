@@ -31,7 +31,6 @@ const HomePage = () => {
     const handleFilter = (e) => {
         setFilter(e.target.value)
     }
-    console.log(filter);
     return (
         <div className="page-container">
             <div className="page-inner">
