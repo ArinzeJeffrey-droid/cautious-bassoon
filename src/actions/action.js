@@ -1,6 +1,6 @@
 import axios from "axios"
 import process from "../env"
-import { GET_ALL_TEMPLATES, SET_LOADER, STOP_LOADER } from "./action.types"
+import { CLEAR_ERROR, ERROR, GET_ALL_TEMPLATES, SET_LOADER, STOP_LOADER } from "./action.types"
 
 const service_url = process.env.SERVICE_URL
 
@@ -18,9 +18,16 @@ export const fetchTemplates = async (dispatch) => {
             type: STOP_LOADER
         })
     } catch (error) {
-        console.log(error, "error");
         dispatch({
             type: STOP_LOADER
         })
+        dispatch({
+            type: ERROR
+        })
     }
+}
+
+export const retryRequest = (dispatch) => {
+    dispatch({ type: CLEAR_ERROR})
+    fetchTemplates(dispatch)
 }

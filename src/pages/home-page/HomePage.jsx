@@ -9,12 +9,13 @@ import { StateContext } from '../../store';
 import { fetchTemplates } from '../../actions/action';
 import Loader from '../../components/loader/Loader';
 import { handleQueries } from "../../utils/misc"
+import FallbackError from '../../components/FallbackError';
 
 
 
 
 const HomePage = () => {
-    const { state: { templates: { data, loading, num_of_results} }, dispatch } = useContext(StateContext)
+    const { state: { error,  templates: { data, loading, num_of_results} }, dispatch } = useContext(StateContext)
     const [page, setPage] = useState(1)
     /** Component Did Mount */
     useEffect(() => {
@@ -61,13 +62,14 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            { loading ? (<Loader/>) : (
+            { error ? <FallbackError/> : loading ? (<Loader/>) : (
                 <React.Fragment>
                     <InfoHeader/>
                     <div className="card-content-container">
                         <CardContentHeader search={search} num_of_results={num_of_results}/>
                         <div className="card-container">
-                            { handleQueries(data, search, filter)?.length === 0 ? (<Loader/>) : handleQueries(data, search, filter)[page-1]?.map((template, index) => (
+                            { handleQueries(data, search, filter)?.length === 0 ? (<Loader/>) : 
+                                handleQueries(data, search, filter)[page-1]?.map((template, index) => (
                                 <Card
                                     key={index*2}
                                     name={template.name}

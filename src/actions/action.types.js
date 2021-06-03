@@ -1,3 +1,5 @@
 export const SET_LOADER = "SET_LOADER"
 export const STOP_LOADER = "STOP_LOADER"
 export const GET_ALL_TEMPLATES = "GET_ALL_TEMPLATES"
+export const ERROR = "ERROR"
+export const CLEAR_ERROR = "CLEAR_ERROR"

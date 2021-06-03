@@ -6,7 +6,8 @@ export const INITIAL_STATE = {
         loading: false,
         data: [],
         num_of_results: 0
-    }
+    },
+    error: false
 }
 
 export const reducer = (state, { type, payload}) => {
@@ -35,6 +36,16 @@ export const reducer = (state, { type, payload}) => {
                     data: payload,
                     num_of_results: payload.length
                 }
+            }
+        case action.ERROR:
+            return {
+                ...state,
+                error: true
+            }
+        case action.CLEAR_ERROR:
+            return {
+                ...state,
+                error: false
             }
         default:
             return state
