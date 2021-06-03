@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { create2dArray } from "./utils/misc";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+const array = ["a", "b", "c", "d"]
+
+it("Creates a two dimensional array from a one dimensional array", () => {
+  expect(create2dArray(array, 2).length).toEqual(2)
+})
